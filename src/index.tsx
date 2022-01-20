@@ -1,10 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import reportWebVitals from './reportWebVitals'
+import { Register } from 'components/Register'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div></div>
+    <div>
+      <Register />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
