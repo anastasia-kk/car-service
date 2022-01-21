@@ -1,20 +1,30 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
+import 'base/assets/sass/style.scss'
+import 'base/assets/sass/style.react.scss'
+import {I18nProvider} from 'base/i18n/i18nProvider'
 import { Register } from 'components/Register'
 import {Login} from 'components/Login'
+import {LayoutProvider, LayoutSplashScreen} from 'base/layout/core'
+import {DashboardWrapper} from 'base/pages/dashboard/DashboardWrapper'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Register />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <I18nProvider>
+      <Suspense fallback={<LayoutSplashScreen />}>
+        <BrowserRouter>
+          <LayoutProvider>
+            <Routes>
+              <Route path="/" element={<Register />} />
+              <Route path="login" element={<Login />} />
+              <Route path='dashboard' element={<DashboardWrapper />} />
+            </Routes>
+          </LayoutProvider>
+        </BrowserRouter>
+      </Suspense>
+    </I18nProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
