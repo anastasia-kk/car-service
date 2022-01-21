@@ -1,20 +1,6 @@
 import React, {useState} from 'react'
-import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
+import {toAbsoluteUrl} from 'base/helpers'
 import {IProfileDetails, profileDetailsInitValues as initialValues} from '../SettingsModel'
-import * as Yup from 'yup'
-import {useFormik} from 'formik'
-
-const profileDetailsSchema = Yup.object().shape({
-  fName: Yup.string().required('First name is required'),
-  lName: Yup.string().required('Last name is required'),
-  company: Yup.string().required('Company name is required'),
-  contactPhone: Yup.string().required('Contact phone is required'),
-  companySite: Yup.string().required('Company site is required'),
-  country: Yup.string().required('Country is required'),
-  language: Yup.string().required('Language is required'),
-  timeZone: Yup.string().required('Time zone is required'),
-  currency: Yup.string().required('Currency is required'),
-})
 
 const ProfileDetails: React.FC = () => {
   const [data, setData] = useState<IProfileDetails>(initialValues)
@@ -24,21 +10,6 @@ const ProfileDetails: React.FC = () => {
   }
 
   const [loading, setLoading] = useState(false)
-  const formik = useFormik<IProfileDetails>({
-    initialValues,
-    validationSchema: profileDetailsSchema,
-    onSubmit: (values) => {
-      setLoading(true)
-      setTimeout(() => {
-        values.communications.email = data.communications.email
-        values.communications.phone = data.communications.phone
-        values.allowMarketing = data.allowMarketing
-        const updatedData = Object.assign(data, values)
-        setData(updatedData)
-        setLoading(false)
-      }, 1000)
-    },
-  })
 
   return (
     <div className='card mb-5 mb-xl-10'>
@@ -56,7 +27,7 @@ const ProfileDetails: React.FC = () => {
       </div>
 
       <div id='kt_account_profile_details' className='collapse show'>
-        <form onSubmit={formik.handleSubmit} noValidate className='form'>
+        <form noValidate className='form'>
           <div className='card-body border-top p-9'>
             <div className='row mb-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>Avatar</label>
@@ -84,13 +55,7 @@ const ProfileDetails: React.FC = () => {
                       type='text'
                       className='form-control form-control-lg form-control-solid mb-3 mb-lg-0'
                       placeholder='First name'
-                      {...formik.getFieldProps('fName')}
                     />
-                    {formik.touched.fName && formik.errors.fName && (
-                      <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block'>{formik.errors.fName}</div>
-                      </div>
-                    )}
                   </div>
 
                   <div className='col-lg-6 fv-row'>
@@ -98,13 +63,7 @@ const ProfileDetails: React.FC = () => {
                       type='text'
                       className='form-control form-control-lg form-control-solid'
                       placeholder='Last name'
-                      {...formik.getFieldProps('lName')}
                     />
-                    {formik.touched.lName && formik.errors.lName && (
-                      <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block'>{formik.errors.lName}</div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -118,13 +77,7 @@ const ProfileDetails: React.FC = () => {
                   type='text'
                   className='form-control form-control-lg form-control-solid'
                   placeholder='Company name'
-                  {...formik.getFieldProps('company')}
                 />
-                {formik.touched.company && formik.errors.company && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.company}</div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -138,13 +91,7 @@ const ProfileDetails: React.FC = () => {
                   type='tel'
                   className='form-control form-control-lg form-control-solid'
                   placeholder='Phone number'
-                  {...formik.getFieldProps('contactPhone')}
                 />
-                {formik.touched.contactPhone && formik.errors.contactPhone && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.contactPhone}</div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -158,13 +105,7 @@ const ProfileDetails: React.FC = () => {
                   type='text'
                   className='form-control form-control-lg form-control-solid'
                   placeholder='Company website'
-                  {...formik.getFieldProps('companySite')}
                 />
-                {formik.touched.companySite && formik.errors.companySite && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.companySite}</div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -176,7 +117,6 @@ const ProfileDetails: React.FC = () => {
               <div className='col-lg-8 fv-row'>
                 <select
                   className='form-select form-select-solid form-select-lg fw-bold'
-                  {...formik.getFieldProps('country')}
                 >
                   <option value=''>Select a Country...</option>
                   <option value='AF'>Afghanistan</option>
@@ -427,11 +367,6 @@ const ProfileDetails: React.FC = () => {
                   <option value='ZM'>Zambia</option>
                   <option value='ZW'>Zimbabwe</option>
                 </select>
-                {formik.touched.country && formik.errors.country && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.country}</div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -440,7 +375,6 @@ const ProfileDetails: React.FC = () => {
               <div className='col-lg-8 fv-row'>
                 <select
                   className='form-select form-select-solid form-select-lg'
-                  {...formik.getFieldProps('language')}
                 >
                   <option value=''>Select a Language...</option>
                   <option value='id'>Bahasa Indonesia - Indonesian</option>
@@ -490,11 +424,6 @@ const ProfileDetails: React.FC = () => {
                   <option value='zh-cn'>简体中文 - Simplified Chinese</option>
                   <option value='zh-tw'>繁體中文 - Traditional Chinese</option>
                 </select>
-                {formik.touched.language && formik.errors.language && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.language}</div>
-                  </div>
-                )}
 
                 <div className='form-text'>
                   Please select a preferred language, including date, time, and number formatting.
@@ -508,7 +437,6 @@ const ProfileDetails: React.FC = () => {
               <div className='col-lg-8 fv-row'>
                 <select
                   className='form-select form-select-solid form-select-lg'
-                  {...formik.getFieldProps('timeZone')}
                 >
                   <option value=''>Select a Timezone..</option>
                   <option value='International Date Line West'>
@@ -665,11 +593,6 @@ const ProfileDetails: React.FC = () => {
                   <option value='Wellington'>(GMT+12:00) Wellington</option>
                   <option value="Nuku'alofa">(GMT+13:00) Nuku'alofa</option>
                 </select>
-                {formik.touched.timeZone && formik.errors.timeZone && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.timeZone}</div>
-                  </div>
-                )}
               </div>
             </div>
 
@@ -679,7 +602,6 @@ const ProfileDetails: React.FC = () => {
               <div className='col-lg-8 fv-row'>
                 <select
                   className='form-select form-select-solid form-select-lg'
-                  {...formik.getFieldProps('currency')}
                 >
                   <option value=''>Select a currency..</option>
                   <option value='USD'>USD - USA dollar</option>
@@ -690,11 +612,6 @@ const ProfileDetails: React.FC = () => {
                   <option value='CAD'>CAD - Canadian dollar</option>
                   <option value='CHF'>CHF - Swiss franc</option>
                 </select>
-                {formik.touched.currency && formik.errors.currency && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.currency}</div>
-                  </div>
-                )}
               </div>
             </div>
 

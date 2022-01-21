@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
-import {KTSVG} from '../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
+import {KTSVG} from 'base/helpers'
 
 const Step2: FC = () => {
   return (
@@ -30,7 +29,7 @@ const Step2: FC = () => {
 
         <div className='row mb-2' data-kt-buttons='true'>
           <div className='col'>
-            <Field
+            <input
               type='radio'
               className='btn-check'
               name='accountTeamSize'
@@ -46,7 +45,7 @@ const Step2: FC = () => {
           </div>
 
           <div className='col'>
-            <Field
+            <input
               type='radio'
               className='btn-check'
               name='accountTeamSize'
@@ -62,7 +61,7 @@ const Step2: FC = () => {
           </div>
 
           <div className='col'>
-            <Field
+            <input
               type='radio'
               className='btn-check'
               name='accountTeamSize'
@@ -78,7 +77,7 @@ const Step2: FC = () => {
           </div>
 
           <div className='col'>
-            <Field
+            <input
               type='radio'
               className='btn-check'
               name='accountTeamSize'
@@ -102,13 +101,13 @@ const Step2: FC = () => {
       <div className='mb-10 fv-row'>
         <label className='form-label mb-3'>Team Account Name</label>
 
-        <Field
+        <input
           type='text'
           className='form-control form-control-lg form-control-solid'
           name='accountName'
         />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='accountName' />
+          ERROR
         </div>
       </div>
 
@@ -145,7 +144,7 @@ const Step2: FC = () => {
             </span>
 
             <span className='form-check form-check-custom form-check-solid'>
-              <Field className='form-check-input' type='radio' name='accountPlan' value='1' />
+              <input className='form-check-input' type='radio' name='accountPlan' value='1' />
             </span>
           </label>
 
@@ -169,7 +168,7 @@ const Step2: FC = () => {
             </span>
 
             <span className='form-check form-check-custom form-check-solid'>
-              <Field className='form-check-input' type='radio' name='accountPlan' value='2' />
+              <input className='form-check-input' type='radio' name='accountPlan' value='2' />
             </span>
           </label>
 
@@ -195,7 +194,7 @@ const Step2: FC = () => {
             </span>
 
             <span className='form-check form-check-custom form-check-solid'>
-              <Field className='form-check-input' type='radio' name='accountPlan' value='3' />
+              <input className='form-check-input' type='radio' name='accountPlan' value='3' />
             </span>
           </label>
         </div>

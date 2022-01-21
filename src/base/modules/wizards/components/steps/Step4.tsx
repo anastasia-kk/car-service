@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
+import {KTSVG, toAbsoluteUrl} from 'base/helpers'
 
 const Step4: FC = () => {
   return (
@@ -28,14 +27,14 @@ const Step4: FC = () => {
           ></i>
         </label>
 
-        <Field
+        <input
           type='text'
           className='form-control form-control-solid'
           placeholder=''
           name='nameOnCard'
         />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='nameOnCard' />
+          ERROR
         </div>
       </div>
 
@@ -43,14 +42,14 @@ const Step4: FC = () => {
         <label className='required fs-6 fw-bold form-label mb-2'>Card Number</label>
 
         <div className='position-relative'>
-          <Field
+          <input
             type='text'
             className='form-control form-control-solid'
             placeholder='Enter card number'
             name='cardNumber'
           />
           <div className='text-danger mt-2'>
-            <ErrorMessage name='cardNumber' />
+            ERRROR
           </div>
 
           <div className='position-absolute translate-middle-y top-50 end-0 me-5'>
@@ -75,44 +74,11 @@ const Step4: FC = () => {
 
           <div className='row fv-row'>
             <div className='col-6'>
-              <Field as='select' name='cardExpiryMonth' className='form-select form-select-solid'>
-                <option></option>
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-                <option value='5'>5</option>
-                <option value='6'>6</option>
-                <option value='7'>7</option>
-                <option value='8'>8</option>
-                <option value='9'>9</option>
-                <option value='10'>10</option>
-                <option value='11'>11</option>
-                <option value='12'>12</option>
-              </Field>
-              <div className='text-danger mt-2'>
-                <ErrorMessage name='cardExpiryMonth' />
-              </div>
+
             </div>
 
             <div className='col-6'>
-              <Field as='select' name='cardExpiryYear' className='form-select form-select-solid'>
-                <option></option>
-                <option value='2021'>2021</option>
-                <option value='2022'>2022</option>
-                <option value='2023'>2023</option>
-                <option value='2024'>2024</option>
-                <option value='2025'>2025</option>
-                <option value='2026'>2026</option>
-                <option value='2027'>2027</option>
-                <option value='2028'>2028</option>
-                <option value='2029'>2029</option>
-                <option value='2030'>2030</option>
-                <option value='2031'>2031</option>
-              </Field>
-              <div className='text-danger mt-2'>
-                <ErrorMessage name='cardExpiryYear' />
-              </div>
+
             </div>
           </div>
         </div>
@@ -128,7 +94,7 @@ const Step4: FC = () => {
           </label>
 
           <div className='position-relative'>
-            <Field
+            <input
               type='text'
               className='form-control form-control-solid'
               minLength={3}
@@ -137,7 +103,7 @@ const Step4: FC = () => {
               name='cardCvv'
             />
             <div className='text-danger mt-2'>
-              <ErrorMessage name='cardCvv' />
+              ERROR
             </div>
 
             <div className='position-absolute translate-middle-y top-50 end-0 me-3'>
@@ -156,7 +122,7 @@ const Step4: FC = () => {
         </div>
 
         <label className='form-check form-switch form-check-custom form-check-solid'>
-          <Field className='form-check-input' type='checkbox' value='1' checked={true} />
+          <input className='form-check-input' type='checkbox' value='1' checked={true} />
           <span className='form-check-label fw-bold text-gray-400'>Save Card</span>
         </label>
       </div>

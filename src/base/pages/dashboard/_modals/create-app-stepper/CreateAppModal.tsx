@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useRef} from 'react'
 import {Modal} from 'react-bootstrap-v5'
-import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
-import {KTSVG} from '../../../../../_metronic/helpers'
+import {StepperComponent} from 'base/assets/ts/components'
+import {KTSVG} from 'base/helpers'
 import {defaultCreateAppData, ICreateAppData} from './IAppModels'
 
 type Props = {

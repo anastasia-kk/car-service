@@ -1,20 +1,23 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import reportWebVitals from './reportWebVitals'
 import { Register } from 'components/Register'
 import {Login} from 'components/Login'
+import {LayoutProvider, LayoutSplashScreen} from 'base/layout/core'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>
+    <Suspense fallback={<LayoutSplashScreen />}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Register />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
+        <LayoutProvider>
+          <Routes>
+            <Route path="/" element={<Register />} />
+            <Route path="login" element={<Login />} />
+          </Routes>
+        </LayoutProvider>
       </BrowserRouter>
-    </div>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

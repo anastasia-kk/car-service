@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {FC} from 'react'
-import {KTSVG} from '../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
+import {KTSVG} from 'base/helpers'
 
 const Step1: FC = () => {
   return (
@@ -29,7 +28,7 @@ const Step1: FC = () => {
       <div className='fv-row'>
         <div className='row'>
           <div className='col-lg-6'>
-            <Field
+            <input
               type='radio'
               className='btn-check'
               name='accountType'
@@ -55,7 +54,7 @@ const Step1: FC = () => {
           </div>
 
           <div className='col-lg-6'>
-            <Field
+            <input
               type='radio'
               className='btn-check'
               name='accountType'
@@ -78,7 +77,7 @@ const Step1: FC = () => {
           </div>
 
           <div className='text-danger mt-2'>
-            <ErrorMessage name='accountType' />
+           ERROR
           </div>
         </div>
       </div>

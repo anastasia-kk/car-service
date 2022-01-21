@@ -1,31 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useRef, useEffect} from 'react'
-import ApexCharts, {ApexOptions} from 'apexcharts'
+import React from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
-import {getCSS} from '../../../assets/ts/_utils'
 
 export function SidebarUser() {
-  const chartRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (!chartRef.current) {
-      return
-    }
-
-    const height = parseInt(getCSS(chartRef.current, 'height'))
-    const chart = new ApexCharts(chartRef.current, chartOptions(height))
-    if (chart) {
-      chart.render()
-    }
-
-    return () => {
-      if (chart) {
-        chart.destroy()
-      }
-    }
-  }, [chartRef])
-
   return (
     <div id='kt_sidebar_content' className='py-10 px-2 px-lg-8'>
       <div
@@ -58,7 +36,6 @@ export function SidebarUser() {
                     </span>
                   </div>
                 </div>
-                <div ref={chartRef} id='kt_user_chart' style={{height: '200px'}}></div>
               </div>
               {/* end::Chart */}
 
@@ -273,48 +250,4 @@ export function SidebarUser() {
       </div>
     </div>
   )
-}
-
-const chartOptions = (height: string | number | undefined): ApexOptions => {
-  return {
-    series: [74],
-    chart: {
-      fontFamily: 'inherit',
-      height: height,
-      type: 'radialBar',
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          margin: 0,
-          size: '78%',
-        },
-        dataLabels: {
-          name: {
-            show: false,
-            fontWeight: '700',
-          },
-          value: {
-            color: '#5E6278',
-            fontSize: '30px',
-            fontWeight: '700',
-            offsetY: 6,
-            show: true,
-            formatter: (val: number) => {
-              return val + '%'
-            },
-          },
-        },
-        track: {
-          background: '#00A3FF',
-          strokeWidth: '100%',
-        },
-      },
-    },
-    colors: ['#F1416C'],
-    stroke: {
-      lineCap: 'round',
-    },
-    labels: ['Progress'],
-  }
 }

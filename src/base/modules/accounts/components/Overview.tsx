@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {KTSVG} from '../../../../_metronic/helpers'
+import {KTSVG} from 'base/helpers'
 import {
-  ChartsWidget1,
   TablesWidget1,
   ListsWidget5,
   TablesWidget5,
-} from '../../../../_metronic/partials/widgets'
+} from 'base/partials/widgets'
 
 export function Overview() {
   return (
@@ -121,9 +120,6 @@ export function Overview() {
       </div>
 
       <div className='row gy-10 gx-xl-10'>
-        <div className='col-xl-6'>
-          <ChartsWidget1 className='card-xxl-stretch mb-5 mb-xl-10' />
-        </div>
 
         <div className='col-xl-6'>
           <TablesWidget1 className='card-xxl-stretch mb-5 mb-xl-10' />

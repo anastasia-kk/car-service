@@ -11,7 +11,6 @@ import {useLocation} from 'react-router-dom'
 import {
   DrawerMessenger,
   ActivityDrawer,
-  Main,
   InviteUsers,
   UpgradePlan,
 } from '../partials'
@@ -55,7 +54,6 @@ const MasterLayout: React.FC = ({children}) => {
       {/* end:: Drawers */}
 
       {/* begin:: Modals */}
-      <Main />
       <InviteUsers />
       <UpgradePlan />
       {/* end:: Modals */}
