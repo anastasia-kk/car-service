@@ -1,12 +1,14 @@
 import React, {Suspense} from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
+import 'base/assets/sass/style.scss'
+import 'base/assets/sass/style.react.scss'
 import {I18nProvider} from 'base/i18n/i18nProvider'
 import { Register } from 'components/Register'
 import {Login} from 'components/Login'
 import {LayoutProvider, LayoutSplashScreen} from 'base/layout/core'
-import {DashboardWrapper} from 'base/pages/dashboard/DashboardWrapper';
+import {DashboardWrapper} from 'base/pages/dashboard/DashboardWrapper'
 
 ReactDOM.render(
   <React.StrictMode>
