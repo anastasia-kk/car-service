@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
-import {toAbsoluteUrl} from '../../base/helpers';
+import {toAbsoluteUrl} from 'base/helpers'
 import {Link} from 'react-router-dom'
 import clsx from 'clsx'
 
