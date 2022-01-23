@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from 'base/helpers'
 import { PasswordMeterComponent } from "base/assets/ts/components";
+import clsx from 'clsx'
 
 
 interface IFormInput {
@@ -10,11 +11,12 @@ interface IFormInput {
   lastName: string;
   email: string;
   password: string;
+  confirmPassword: string
 }
 
 export const Register = () => {
   const [loading, setLoading] = useState(false)
-  const { register, formState: { errors }, handleSubmit } = useForm<IFormInput>()
+  const { register, formState: { errors, touchedFields }, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = data => console.log(data)
 
   useEffect(()=>{
@@ -34,7 +36,9 @@ export const Register = () => {
 
         {/* begin::Link */}
         <div className='text-gray-400 fw-bold fs-4'>
-          Already have an account?
+          <Link to='/login' className='link-primary fw-bolder'>
+            Already have an account?
+          </Link>
           <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
             Forgot Password ?
           </Link>
@@ -45,25 +49,51 @@ export const Register = () => {
       <div className='row fv-row mb-7'>
         <div className='col-xl-6'>
           <label className='class="form-label fw-bolder text-dark fs-6'>First name</label>
-          {/*<input {...register("firstName", { required: true, maxLength: 20 })} placeholder="First Name" />*/}
-          {/*{errors.firstName?.type === 'required' && "Required"}*/}
           <input
+            {...register("firstName", { required: true, maxLength: 20 })}
             placeholder='First name'
             type='text'
             autoComplete='off'
+            className={clsx(
+              'form-control form-control-lg form-control-solid',
+              {
+                'is-invalid': errors.firstName,
+              },
+              {
+                'is-valid': touchedFields.firstName && !errors.firstName,
+              }
+            )}
           />
+          {errors.firstName && (
+            <div className='fv-plugins-message-container'>
+              <span role='alert'>Required</span>
+            </div>
+          )}
         </div>
         <div className='col-xl-6'>
           {/* begin::Form group Lastname */}
           <div className='fv-row mb-5'>
             <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
-            {/*<input {...register("lastName", { required: true })} placeholder="Last Name" />*/}
-            {/*{errors.lastName && "Required"}*/}
             <input
+              {...register("lastName", { required: true })}
               placeholder='Last name'
               type='text'
               autoComplete='off'
+              className={clsx(
+                'form-control form-control-lg form-control-solid',
+                {
+                  'is-invalid': errors.lastName,
+                },
+                {
+                  'is-valid': touchedFields.lastName && !errors.lastName,
+                }
+              )}
             />
+            {errors.lastName && (
+              <div className='fv-plugins-message-container'>
+                <span role='alert'>Required</span>
+              </div>
+            )}
           </div>
           {/* end::Form group */}
         </div>
@@ -73,13 +103,26 @@ export const Register = () => {
       {/* begin::Form group Email */}
       <div className='fv-row mb-7'>
         <label className='form-label fw-bolder text-dark fs-6'>Email</label>
-        {/*<input type="email" {...register("email", { required: true })} placeholder="Email" />*/}
-        {/*{errors.email && "Required"}*/}
         <input
+          {...register("email", { required: true })}
           placeholder='Email'
           type='email'
           autoComplete='off'
+          className={clsx(
+            'form-control form-control-lg form-control-solid',
+            {
+              'is-invalid': errors.email,
+            },
+            {
+              'is-valid': touchedFields.email && !errors.email,
+            }
+          )}
         />
+        {errors.email && (
+          <div className='fv-plugins-message-container'>
+            <span role='alert'>Required</span>
+          </div>
+        )}
       </div>
       {/* end::Form group */}
 
@@ -88,13 +131,26 @@ export const Register = () => {
         <div className='mb-1'>
           <label className='form-label fw-bolder text-dark fs-6'>Password</label>
           <div className='position-relative mb-3'>
-            {/*<input {...register("password", { required: true })} placeholder="Password" />*/}
-            {/*{errors.password && "Required"}*/}
             <input
+              {...register("password", { required: true })}
               type='password'
               placeholder='Password'
               autoComplete='off'
+              className={clsx(
+                'form-control form-control-lg form-control-solid',
+                {
+                  'is-invalid': errors.password,
+                },
+                {
+                  'is-valid': touchedFields.password && !errors.password,
+                }
+              )}
             />
+            {errors.password && (
+              <div className='fv-plugins-message-container'>
+                <span role='alert'>Required</span>
+              </div>
+            )}
           </div>
           {/* begin::Meter */}
           <div
@@ -126,15 +182,25 @@ export const Register = () => {
       <div className='fv-row mb-5'>
         <label className='form-label fw-bolder text-dark fs-6'>Confirm Password</label>
         <input
+          {...register("confirmPassword", { required: true })}
           type='password'
           placeholder='Password confirmation'
           autoComplete='off'
+          className={clsx(
+            'form-control form-control-lg form-control-solid',
+            {
+              'is-invalid': errors.confirmPassword,
+            },
+            {
+              'is-valid': touchedFields.confirmPassword && !errors.confirmPassword,
+            }
+          )}
         />
-        <div className='fv-plugins-message-container'>
-          <div className='fv-help-block'>
-            <span role='alert'>ERROR</span>
+        {errors.confirmPassword && (
+          <div className='fv-plugins-message-container'>
+            <span role='alert'>Required</span>
           </div>
-        </div>
+        )}
       </div>
       {/* end::Form group */}
 

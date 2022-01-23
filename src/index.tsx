@@ -5,10 +5,9 @@ import reportWebVitals from './reportWebVitals'
 import 'base/assets/sass/style.scss'
 import 'base/assets/sass/style.react.scss'
 import {I18nProvider} from 'base/i18n/i18nProvider'
-import { Register } from 'components/Register'
-import {Login} from 'components/Login'
 import {LayoutProvider, LayoutSplashScreen} from 'base/layout/core'
 import {DashboardWrapper} from 'base/pages/dashboard/DashboardWrapper'
+import {Auth} from 'pages/Auth'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,9 +16,10 @@ ReactDOM.render(
         <BrowserRouter>
           <LayoutProvider>
             <Routes>
-              <Route path="/" element={<Register />} />
-              <Route path="login" element={<Login />} />
+              <Route path="registration" element={<Auth page="register"/>} />
+              <Route path="login" element={<Auth page="login"/>} />
               <Route path='dashboard' element={<DashboardWrapper />} />
+              <Route path='/' element={<DashboardWrapper />} />
             </Routes>
           </LayoutProvider>
         </BrowserRouter>
