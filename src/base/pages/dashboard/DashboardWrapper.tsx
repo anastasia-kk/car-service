@@ -11,6 +11,7 @@ import {
   TablesWidget5,
   TablesWidget10,
 } from 'base/partials/widgets'
+import {useAuth} from 'context/AuthContext'
 
 const DashboardPage: FC = () => (
   <>
@@ -64,6 +65,8 @@ const DashboardPage: FC = () => (
 
 const DashboardWrapper: FC = () => {
   const intl = useIntl()
+  const {isLoggedIn} = useAuth()
+  console.log(isLoggedIn)
   return (
     <>
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>

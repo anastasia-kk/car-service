@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
 import {toAbsoluteUrl} from 'base/helpers'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import clsx from 'clsx'
+import {useAuth} from 'context/AuthContext'
 
 interface IFormInput {
   email: string;
@@ -10,9 +11,20 @@ interface IFormInput {
 }
 
 export const Login = () => {
+  const {isLoggedIn} = useAuth()
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const { register, formState: { errors, touchedFields }, handleSubmit } = useForm<IFormInput>()
-  const onSubmit: SubmitHandler<IFormInput> = data => console.log(data)
+  const onSubmit: SubmitHandler<IFormInput> = data => {
+    if(data && !errors.email && !errors.password) {
+      localStorage.setItem('APP_IS_LOGGED_IN', 'true')
+      navigate('/dashboard')
+    }
+    return false
+  }
+
+  console.log(isLoggedIn)
+
 
   return (
     <form
@@ -43,7 +55,7 @@ export const Login = () => {
       {/* begin::Form group */}
       <div className='fv-row mb-10'>
         <input
-          {...register("email", { required: true })}
+          {...register("email", { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})}
           placeholder='Email'
           type='email'
           name='email'

@@ -8,20 +8,23 @@ import {I18nProvider} from 'base/i18n/i18nProvider'
 import {LayoutProvider, LayoutSplashScreen} from 'base/layout/core'
 import {DashboardWrapper} from 'base/pages/dashboard/DashboardWrapper'
 import {Auth} from 'pages/Auth'
+import {AuthProvider} from 'context/AuthContext'
 
 ReactDOM.render(
   <React.StrictMode>
     <I18nProvider>
       <Suspense fallback={<LayoutSplashScreen />}>
         <BrowserRouter>
-          <LayoutProvider>
-            <Routes>
-              <Route path="registration" element={<Auth page="register"/>} />
-              <Route path="login" element={<Auth page="login"/>} />
-              <Route path='dashboard' element={<DashboardWrapper />} />
-              <Route path='/' element={<DashboardWrapper />} />
-            </Routes>
-          </LayoutProvider>
+          <AuthProvider>
+            <LayoutProvider>
+              <Routes>
+                <Route path="registration" element={<Auth page="register"/>} />
+                <Route path="login" element={<Auth page="login"/>} />
+                <Route path='dashboard' element={<DashboardWrapper />} />
+                <Route path='/' element={<DashboardWrapper />} />
+              </Routes>
+            </LayoutProvider>
+          </AuthProvider>
         </BrowserRouter>
       </Suspense>
     </I18nProvider>
