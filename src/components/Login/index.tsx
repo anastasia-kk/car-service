@@ -11,20 +11,18 @@ interface IFormInput {
 }
 
 export const Login = () => {
-  const {isLoggedIn} = useAuth()
+  const {isLoggedIn, setIsLoggedIn} = useAuth()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const { register, formState: { errors, touchedFields }, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = data => {
     if(data && !errors.email && !errors.password) {
       localStorage.setItem('APP_IS_LOGGED_IN', 'true')
+      setIsLoggedIn(true)
       navigate('/dashboard')
     }
     return false
   }
-
-  console.log(isLoggedIn)
-
 
   return (
     <form
