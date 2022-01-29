@@ -13,9 +13,8 @@ import {
 } from 'base/partials/widgets'
 import {useAuth} from 'context/AuthContext'
 import {Navigate} from 'react-router-dom'
-import {AsideMenuMain} from 'base/layout/components/aside/AsideMenuMain'
 import {MasterLayout} from 'base/layout/MasterLayout'
-import {Calendar} from '../../components/Calendar';
+import {Calendar} from 'components/Calendar'
 
 const DashboardPage: FC = () => (
   <MasterLayout>
@@ -85,7 +84,6 @@ export const Dashboard: FC = () => {
       )}
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
       <DashboardPage />
-      <AsideMenuMain />
      </>
   )
 }
