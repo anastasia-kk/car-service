@@ -13,9 +13,11 @@ import {
 } from 'base/partials/widgets'
 import {useAuth} from 'context/AuthContext'
 import {Navigate} from 'react-router-dom'
+import {AsideMenuMain} from 'base/layout/components/aside/AsideMenuMain'
+import {MasterLayout} from 'base/layout/MasterLayout'
 
 const DashboardPage: FC = () => (
-  <>
+  <MasterLayout>
     {/* begin::Row */}
     <div className='row gy-5 g-xl-8'>
       <div className='col-xxl-4'>
@@ -61,7 +63,7 @@ const DashboardPage: FC = () => (
         <TablesWidget5 className='card-xxl-stretch mb-5 mb-xxl-8' />
       </div>
     </div>
-  </>
+  </MasterLayout>
 )
 
 export const Dashboard: FC = () => {
@@ -74,7 +76,8 @@ export const Dashboard: FC = () => {
       )}
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
       <DashboardPage />
-    </>
+      <AsideMenuMain />
+     </>
   )
 }
 

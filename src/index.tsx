@@ -10,6 +10,7 @@ import {Auth} from 'pages/Auth'
 import {AuthProvider} from 'context/AuthContext'
 import {Logout} from 'components/Logout'
 import {Dashboard} from 'pages/Dashboard'
+import {MasterLayout} from 'base/layout/MasterLayout'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.render(
                 <Route path='logout' element={<Logout />} />
                 <Route path='dashboard' element={<Dashboard />} />
                 <Route path='/' element={<Dashboard />} />
+                <Route path='/layout' element={<MasterLayout />} />
               </Routes>
             </LayoutProvider>
           </AuthProvider>

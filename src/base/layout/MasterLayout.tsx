@@ -16,7 +16,7 @@ import {
 } from '../partials'
 import {MenuComponent} from '../assets/ts/components'
 
-const MasterLayout: React.FC = ({children}) => {
+export const MasterLayout: React.FC = ({children}) => {
   const location = useLocation()
   useEffect(() => {
     setTimeout(() => {
@@ -62,4 +62,3 @@ const MasterLayout: React.FC = ({children}) => {
   )
 }
 
-export {MasterLayout}
