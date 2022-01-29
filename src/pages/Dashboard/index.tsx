@@ -13,10 +13,11 @@ import {
 } from 'base/partials/widgets'
 import {useAuth} from 'context/AuthContext'
 import {Navigate} from 'react-router-dom'
-import {Calendar} from '../../components/Calendar';
+import {MasterLayout} from 'base/layout/MasterLayout'
+import {Calendar} from 'components/Calendar'
 
 const DashboardPage: FC = () => (
-  <>
+  <MasterLayout>
     {/* begin::Row */}
     <div className='row gy-5 g-xl-8'>
       <div className='col-xxl-4'>
@@ -70,7 +71,7 @@ const DashboardPage: FC = () => (
         <Calendar className='card-xxl-stretch mb-5 mb-xxl-8' />
       </div>
     </div>
-  </>
+  </MasterLayout>
 )
 
 export const Dashboard: FC = () => {
@@ -83,7 +84,7 @@ export const Dashboard: FC = () => {
       )}
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
       <DashboardPage />
-    </>
+     </>
   )
 }
 
