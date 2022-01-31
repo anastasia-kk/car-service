@@ -28,7 +28,7 @@ export const Calendar: FC<Props> = ({className}) => {
             data-bs-target='#newEventModal'
           >
             <KTSVG path='media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
-            New Member
+            Add Event
           </a>
         </div>
       </div>
