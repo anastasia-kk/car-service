@@ -16,4 +16,7 @@ $mode: default;
 @import "layout/layout";
 @import "./core/layout/docs/layout";
 
+// Plugins
+@import "./core/vendors/plugins/plugins";
 @import './core/vendors/plugins/fullcalendar';
+@import './core/vendors/plugins/flatpickr';

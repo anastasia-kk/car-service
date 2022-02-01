@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from 'base/helpers'
 import {Link, useNavigate} from 'react-router-dom'
 import clsx from 'clsx'
 import {useAuth} from 'context/AuthContext'
 import {SubmitHandler, useForm} from 'react-hook-form'
+import Flatpickr from 'react-flatpickr'
 
 interface IFormInput {
   email: string;
@@ -98,7 +99,7 @@ export const Event: FC = () => {
               {/* end::Form group */}
               <div className='fv-row mb-9'>
                 <label className='form-check form-check-custom form-check-solid'>
-                  <input className='form-check-input' type='checkbox' id='calendar-checkbox'/>
+                  <input className='form-check-input' type='checkbox' />
                   <span className='form-check-label fw-bold'>All Day</span>
                 </label>
               </div>
@@ -109,17 +110,29 @@ export const Event: FC = () => {
                     {/* begin::Label */}
                     <label className='fs-6 fw-bold mb-2 required'>Event Start Date</label>
                     {/* end::Label */}
-                    <input
-                      className='form-control form-control-solid flatpickr-calendar cursor-pointer active'
-                      type='text'
-                      readOnly={true}
+                    <Flatpickr
+                      className='form-control form-control-solid cursor-pointer active'
                       placeholder='Pick a date'
+                      readOnly
+                      options={{ allowInput: true }}
                     />
                   </div>
                 </div>
+                {/* begin::Calendar-picker */}
+                <div className='col'>
+                  <div className='fv-row mb-9'>
+                    <label className='fs-6 fw-bold mb-2'>Event Start Time</label>
+                    <input
+                      className='form-control form-control-solid flatpickr-hour cursor-pointer active'
+                      type='text'
+                      readOnly
+                      placeholder='Pick a start time'
+                    />
+                  </div>
+                </div>
+                {/* end::Calendar-picker */}
               </div>
-              {/* begin::Calendar-picker */}
-              {/* end::Calendar-picker */}
+
               <div className='row row-cols-lg-2 g-10'>
                 <div className='col'>
                   <div className='fv-row mb-9 fv-plugins-icon-container fv-plugins=bootstrap5-row-valid'>
