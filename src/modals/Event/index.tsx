@@ -15,6 +15,7 @@ interface IFormInput {
 export const Event: FC = () => {
   const {isLoggedIn, setIsLoggedIn} = useAuth()
   const navigate = useNavigate()
+  const [time, setTime] = useState(true)
   const [loading, setLoading] = useState(false)
   const { register, formState: { errors, touchedFields }, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = data => {
@@ -99,11 +100,12 @@ export const Event: FC = () => {
               {/* end::Form group */}
               <div className='fv-row mb-9'>
                 <label className='form-check form-check-custom form-check-solid'>
-                  <input className='form-check-input' type='checkbox' />
+                  <input className='form-check-input' type='checkbox' onChange={() => setTime(!time)} />
                   <span className='form-check-label fw-bold'>All Day</span>
                 </label>
               </div>
 
+              {/* begin::Calendar-picker */}
               <div className='row row-cols-lg-2 g-10'>
                 <div className='col'>
                   <div className='fv-row mb-9 fv-plugins-icon-container fv-plugins=bootstrap5-row-valid'>
@@ -118,17 +120,23 @@ export const Event: FC = () => {
                     />
                   </div>
                 </div>
-                {/* begin::Calendar-picker */}
                 <div className='col'>
-                  <div className='fv-row mb-9'>
-                    <label className='fs-6 fw-bold mb-2'>Event Start Time</label>
-                    <input
-                      className='form-control form-control-solid flatpickr-hour cursor-pointer active'
-                      type='text'
-                      readOnly
-                      placeholder='Pick a start time'
-                    />
-                  </div>
+                  {time && (
+                    <div className='fv-row mb-9'>
+                      <label className='fs-6 fw-bold mb-2'>Event Start Time</label>
+                      <Flatpickr
+                        className='form-control form-control-solid flatpickr-hour cursor-pointer active'
+                        type='text'
+                        readOnly
+                        placeholder='Pick a start time'
+                        options={{
+                          enableTime: true,
+                          noCalendar: true,
+                          dateFormat: "H:i"
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
                 {/* end::Calendar-picker */}
               </div>
@@ -137,10 +145,36 @@ export const Event: FC = () => {
                 <div className='col'>
                   <div className='fv-row mb-9 fv-plugins-icon-container fv-plugins=bootstrap5-row-valid'>
                     {/* begin::Label */}
-                    <label className='fs-6 fw-bold mb-2'>Event End Date</label>
+                    <label className='fs-6 fw-bold mb-2 required'>Event End Date</label>
                     {/* end::Label */}
+                    <Flatpickr
+                      className='form-control form-control-solid cursor-pointer active'
+                      placeholder='Pick a date'
+                      readOnly
+                      options={{ allowInput: true }}
+                    />
                   </div>
                 </div>
+                {/* begin::Calendar-picker */}
+                <div className='col'>
+                  {time && (
+                    <div className='fv-row mb-9'>
+                      <label className='fs-6 fw-bold mb-2'>Event Start Time</label>
+                      <Flatpickr
+                        className='form-control form-control-solid flatpickr-hour cursor-pointer active'
+                        type='text'
+                        readOnly
+                        placeholder='Pick a start time'
+                        options={{
+                          enableTime: true,
+                          noCalendar: true,
+                          dateFormat: "H:i"
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+                {/* end::Calendar-picker */}
               </div>
               {/* begin::Action */}
               <div className='modal-footer flex-center'>
