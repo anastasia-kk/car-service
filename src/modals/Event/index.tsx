@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useEffect, useState} from 'react'
-import {KTSVG, toAbsoluteUrl} from 'base/helpers'
-import {Link, useNavigate} from 'react-router-dom'
+import React, {FC, useState} from 'react'
+import {KTSVG} from 'base/helpers'
+import {useNavigate} from 'react-router-dom'
 import clsx from 'clsx'
 import {useAuth} from 'context/AuthContext'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import Flatpickr from 'react-flatpickr'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 interface IFormInput {
   email: string;
@@ -13,7 +15,7 @@ interface IFormInput {
 }
 
 export const Event: FC = () => {
-  const {isLoggedIn, setIsLoggedIn} = useAuth()
+  const {setIsLoggedIn} = useAuth()
   const navigate = useNavigate()
   const [time, setTime] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -26,12 +28,39 @@ export const Event: FC = () => {
     }
     return false
   }
+  const handleCancel = () => {
+    const MySwal = withReactContent(Swal)
+
+    MySwal.fire({
+      didOpen: () => {
+        MySwal.clickConfirm()
+      }
+    }).then(async () => {
+      const swalFired = await MySwal.fire({
+        text: "Are you sure you would like to cancel?",
+        icon: "warning",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, cancel it!",
+        cancelButtonText: "No, return",
+        customClass: {
+          confirmButton: "btn btn-primary",
+          cancelButton: "btn btn-light"
+        }
+      });
+      if(swalFired.isConfirmed) {
+        const closeBtnModal = document.getElementById('newEventModalCloseBtn')
+        // @ts-ignore
+        closeBtnModal.click()
+      }
+    })
+  }
   return (
     <div className='modal fade' id='newEventModal' aria-hidden='true'>
       <div className='modal-dialog mw-650px'>
         <div className='modal-content'>
           <div className='modal-header pb-0 border-0 justify-content-end'>
-            <div className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+            <div id="newEventModalCloseBtn" className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
               <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
             </div>
           </div>
@@ -179,6 +208,7 @@ export const Event: FC = () => {
               {/* begin::Action */}
               <div className='modal-footer flex-center'>
                 <button
+                  onClick={() => handleCancel()}
                   type='reset'
                   id='kt_add_event_cancel'
                   className='btn btn-light'>
