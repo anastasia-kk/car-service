@@ -6,7 +6,6 @@ import {
   ListsWidget2,
   ListsWidget3,
   ListsWidget4,
-  ListsWidget5,
   ListsWidget6,
   TablesWidget5,
   TablesWidget10,
@@ -18,18 +17,6 @@ import {Calendar} from 'components/Calendar'
 
 const DashboardPage: FC = () => (
   <MasterLayout>
-    {/* begin::Row */}
-    <div className='row gy-5 g-xl-8'>
-      <div className='col-xxl-4'>
-      </div>
-      <div className='col-xxl-4'>
-        <ListsWidget5 className='card-xxl-stretch' />
-      </div>
-      <div className='col-xxl-4'>
-      </div>
-    </div>
-    {/* end::Row */}
-
     {/* begin::Row */}
     <div className='row gy-5 gx-xl-8'>
       <div className='col-xxl-4'>
