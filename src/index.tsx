@@ -11,6 +11,9 @@ import {AuthProvider} from 'context/AuthContext'
 import {Logout} from 'components/Logout'
 import {Dashboard} from 'pages/Dashboard'
 import {MasterLayout} from 'base/layout/MasterLayout'
+import {CarDetails} from 'pages/CarDetails'
+import {ServiceHistory} from 'pages/ServiceHistory'
+import {ServiceSchedule} from 'pages/ServiceSchedule'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,6 +29,9 @@ ReactDOM.render(
                 <Route path='dashboard' element={<Dashboard />} />
                 <Route path='/' element={<Dashboard />} />
                 <Route path='/layout' element={<MasterLayout />} />
+                <Route path='/details' element={<CarDetails />} />
+                <Route path='/history' element={<ServiceHistory />} />
+                <Route path='/schedule' element={<ServiceSchedule />} />
               </Routes>
             </LayoutProvider>
           </AuthProvider>
