@@ -10,24 +10,26 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 interface IFormInput {
-  email: string;
-  password: string;
+  eventName: string;
+  eventDescription: string;
+  eventLocation: string;
 }
 
 export const Event: FC = () => {
   const {setIsLoggedIn} = useAuth()
   const navigate = useNavigate()
+  const [events, setEvents] = useState([])
+  const [event, setEvent] = useState({})
   const [time, setTime] = useState(true)
   const [loading, setLoading] = useState(false)
   const { register, formState: { errors, touchedFields }, handleSubmit } = useForm<IFormInput>()
-  const onSubmit: SubmitHandler<IFormInput> = data => {
-    if(data && !errors.email && !errors.password) {
-      localStorage.setItem('APP_IS_LOGGED_IN', 'true')
-      setIsLoggedIn(true)
-      navigate('/dashboard')
-    }
-    return false
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const eventObject = {...event, ...data}
+    setEvent(eventObject)
+    // @ts-ignore
+    setEvents([...events, eventObject])
   }
+  console.log(events)
   const handleCancel = () => {
     const MySwal = withReactContent(Swal)
 
@@ -83,9 +85,9 @@ export const Event: FC = () => {
               </div>
               <div className='fv-row mb-10'>
                 <input
-                  {...register}
+                  {...register('eventName', {required: true})}
                   type='text'
-                  name='text'
+                  name='eventName'
                   className={clsx('form-control form-control-lg form-control-solid')}
                 />
               </div>
@@ -101,8 +103,9 @@ export const Event: FC = () => {
                 </div>
 
                 <input
-                  {...register}
+                  {...register('eventDescription')}
                   type='text'
+                  name='eventDescription'
                   className={clsx(
                     'form-control form-control-lg form-control-solid')}
                 />
@@ -120,8 +123,9 @@ export const Event: FC = () => {
                 </div>
 
                 <input
-                  {...register}
+                  {...register('eventLocation')}
                   type='text'
+                  name='eventLocation'
                   className={clsx(
                     'form-control form-control-lg form-control-solid')}
                 />
@@ -146,7 +150,10 @@ export const Event: FC = () => {
                       placeholder='Pick a date'
                       readOnly
                       options={{ allowInput: true }}
-                    />
+                      onChange={date => {
+                        setEvent({ ...event, start: date })
+                      }}
+                     />
                   </div>
                 </div>
                 <div className='col'>
@@ -181,6 +188,9 @@ export const Event: FC = () => {
                       placeholder='Pick a date'
                       readOnly
                       options={{ allowInput: true }}
+                      onChange={date => {
+                        setEvent({ ...event, end: date })
+                      }}
                     />
                   </div>
                 </div>
@@ -188,12 +198,12 @@ export const Event: FC = () => {
                 <div className='col'>
                   {time && (
                     <div className='fv-row mb-9'>
-                      <label className='fs-6 fw-bold mb-2'>Event Start Time</label>
+                      <label className='fs-6 fw-bold mb-2'>Event End Time</label>
                       <Flatpickr
                         className='form-control form-control-solid flatpickr-hour cursor-pointer active'
                         type='text'
                         readOnly
-                        placeholder='Pick a start time'
+                        placeholder='Pick an end time'
                         options={{
                           enableTime: true,
                           noCalendar: true,
